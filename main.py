@@ -1,4 +1,5 @@
 import csv
+import json
 import os
 from datetime import datetime
 
@@ -16,13 +17,25 @@ def copy_new_reports(path_to_new_aida_reports):
 
 
 def parse(path_aida_reports):
+    computers = {}
     with os.scandir(path_aida_reports) as it:
         for entry in it:
             with open(path_aida_reports + entry.name, 'r') as aida_report:
                 report = csv.DictReader(aida_report)
+                for line in report:
+                    if line['Item'] == 'Компьютер':
+                        pc_name = line['Value']
+                    elif line['Item'] == 'Генератор':
+                        user = line['Value']
 
+                computers[pc_name] = {
+                    'Имя компьютера': pc_name,
+                    'Имя пользователя': user
+                }
+    with open('computers.json', 'w') as parsed_json:
+        json.dump(computers, parsed_json, indent='   ')
     return 'Parse - OK'
 
 
-path_to_new_aida_reports = input()
+path_to_new_aida_reports = f'\\\\zeon\\SYSVOL\\sbrce.ru\\report_it\\report2019\\{str(datetime.now().date())}\\'
 print(copy_new_reports(path_to_new_aida_reports))
