@@ -25,12 +25,21 @@ def parse(path_aida_reports):
                 for line in report:
                     if line['Item'] == 'Компьютер':
                         pc_name = line['Value']
+                        print(pc_name)
                     elif line['Item'] == 'Генератор':
                         user = line['Value']
+                    elif line['Item'] == 'Тип ЦП':
+                        processor_name = line['Value']
+                    elif line['Item'] == 'Системная плата':
+                        motherboard = line['Value']
 
                 computers[pc_name] = {
-                    'Имя компьютера': pc_name,
-                    'Имя пользователя': user
+                    'PC name': pc_name,
+                    'Username': user,
+                    'Specs': {
+                        'CPU': processor_name,
+                        'Motherboard': motherboard
+                    }
                 }
     with open('computers.json', 'w') as parsed_json:
         json.dump(computers, parsed_json, indent='   ')
