@@ -37,5 +37,5 @@ def parse(path_aida_reports):
     return 'Parse - OK'
 
 
-path_to_new_aida_reports = f'\\\\zeon\\SYSVOL\\sbrce.ru\\report_it\\report2019\\{str(datetime.now().date())}\\'
+path_to_new_aida_reports = input()
 print(copy_new_reports(path_to_new_aida_reports))
