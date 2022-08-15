@@ -88,5 +88,5 @@ OneNote for Windows 10Отправить в OneNote 16Foxit Reader PDF PrinterGe
     logging.info('Report "Computers.json" has been updated!')
 
 
-path_to_new_aida_reports = f'\\\\zeon\\SYSVOL\\sbrce.ru\\report_it\\report2019\\{str(datetime.now().date())}\\'
+path_to_new_aida_reports = f''  # put path to newest reports there
 print(copy_new_reports(path_to_new_aida_reports))
